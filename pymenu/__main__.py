@@ -1,4 +1,5 @@
 import re
+import win32clipboard
 
 import tkinter as tk
 from tkinter.ttk import *
@@ -10,6 +11,14 @@ cherry
 date
 elderberry
 """.split()
+
+
+def paste(text):
+    win32clipboard.OpenClipboard()
+    win32clipboard.EmptyClipboard()
+    win32clipboard.SetClipboardText(text)
+    win32clipboard.CloseClipboard()
+
 
 def update_listbox(event):
     if not event is None:
@@ -73,7 +82,7 @@ def eval_expr(x):
 def handle_return(event):
     index = listbox.curselection()
     value = listbox.get(index)
-    print(value)
+    paste(value)
     root.destroy()
 
 
@@ -106,7 +115,8 @@ def delete_line(event):
 def handle_click(event):
     index = listbox.nearest(event.y)
     item = listbox.get(index)
-    print('click', item)
+    paste(item)
+    root.destroy()
 
 root = tk.Tk()
 
