@@ -13,7 +13,8 @@ elderberry
 """.split()
 
 
-def paste(text):
+def paste(val):
+    text = str(val)
     win32clipboard.OpenClipboard()
     win32clipboard.EmptyClipboard()
     win32clipboard.SetClipboardText(text)
