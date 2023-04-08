@@ -84,7 +84,7 @@ def handle_return(event):
     index = listbox.curselection()
     value = listbox.get(index)
     paste(value)
-    root.destroy()
+    root.withdraw()
 
 
 def select_next(event):
@@ -117,7 +117,7 @@ def handle_click(event):
     index = listbox.nearest(event.y)
     item = listbox.get(index)
     paste(item)
-    root.destroy()
+    root.withdraw()
 
 root = tk.Tk()
 
@@ -153,9 +153,9 @@ y = (screen_height // 2) - (window_height // 2)
 
 root.geometry("+{}+{}".format(x, y))
 
-root.bind('<Escape>', lambda e: root.destroy())
+root.bind('<Escape>', lambda e: root.withdraw())
 root.bind('<Return>', handle_return)
-root.bind('<FocusOut>', lambda e: root.destroy())
+root.bind('<FocusOut>', lambda e: root.withdraw())
 root.bind('<Up>', select_previous)
 root.bind('<Down>', select_next)
 root.bind('<Control-p>', select_previous)
@@ -163,7 +163,10 @@ root.bind('<Control-n>', select_next)
 root.bind('<Control-u>', delete_line)
 
 listbox.bind('<Button-1>', handle_click)
-root.protocol("WM_DELETE_WINDOW", root.destroy)
+root.protocol("WM_DELETE_WINDOW", root.withdraw)
 
+#root.withdraw()
 root.mainloop()
+
+# os.startfile(os.path.normpath(path))
 
